@@ -15,24 +15,24 @@ USER paperspace
 
 # Tmux setting
 RUN cat <<-EOF >> $HOME/.tmux.conf 
-    set-option -g mouse on
+	set-option -g mouse on
 EOF
 
 # Install Python
 RUN sudo apt install -y \
-        build-essential ca-certificates \
-        libbz2-dev zlib1g-dev libffi-dev libncursesw5-dev libreadline-dev libsqlite3-dev liblzma-dev libssl-dev libhdf5-dev
+    build-essential ca-certificates \
+    libbz2-dev zlib1g-dev libffi-dev libncursesw5-dev libreadline-dev libsqlite3-dev liblzma-dev libssl-dev libhdf5-dev
 RUN curl https://pyenv.run | bash
 RUN cat <<-EOF >> $HOME/.bashrc
-    export PATH="$HOME/.pyenv/bin:\$PATH"
-    eval "\$(pyenv init -)"
+	export PATH="$HOME/.pyenv/bin:\$PATH"
+	eval "\$(pyenv init -)"
 EOF
 RUN /bin/bash -ic "source ~/.bashrc; pyenv install $PYTHON_VERSION; pyenv global $PYTHON_VERSION"
 
 # Install Poetry
 RUN /bin/bash -ic "curl -sSL https://install.python-poetry.org | python3 -"
 RUN cat <<-EOF >> $HOME/.bashrc
-    export PATH="$HOME/.local/bin:\$PATH"
+	export PATH="$HOME/.local/bin:\$PATH"
 EOF
 RUN /bin/bash -ic "poetry config virtualenvs.in-project true"
 

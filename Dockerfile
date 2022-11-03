@@ -9,7 +9,7 @@ RUN apt update && \
 # Setup User
 RUN useradd -ms /bin/bash paperspace
 RUN echo 'paperspace ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-RUN mkdir -p /notebooks/.ssh
+RUN mkdir -p /home/paperspace/.ssh
 RUN mkdir -p /run/sshd
 USER paperspace
 
